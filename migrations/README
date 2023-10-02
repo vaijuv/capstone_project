@@ -1,0 +1,145 @@
+##### API Documentation #####
+
+
+GET '/api/v1/movies'
+- Fetches a list of movies 
+- Request Arguments: None
+- Returns: An object with list of movies,number of total movies, sucess status
+{
+    "movies": [
+        {
+            "id": 6,
+            "release_date": "2023-10-01",
+            "title": "The Mummy Returns"
+        },
+        {
+            "id": 10,
+            "release_date": "2023-10-02",
+            "title": "Avatar Reincarnation"
+        },
+        {
+            "id": 15,
+            "release_date": "2023-10-01",
+            "title": "Titanic"
+        }
+    ],
+    "success": true,
+    "total_movies": 3
+}
+
+
+
+GET '/api/v1/actors'
+- Fetches a list of actors 
+- Request Arguments: None
+- Returns: An object with list of actors,number of total actors, success status
+{
+    "actors": [
+        {
+            "age": 30,
+            "gender": "Female",
+            "id": 2,
+            "name": "Emma Watson"
+        },
+        {
+            "age": 55,
+            "gender": "Male",
+            "id": 7,
+            "name": "SRK"
+        },
+        {
+            "age": 55,
+            "gender": "Male",
+            "id": 15,
+            "name": "Salman"
+        }
+    ],
+    "success": true,
+    "total_actors": 3
+}
+
+
+POST '/api/v1/movies'
+- Creates a new movie
+- Request Arguments:
+  {
+    "title":"Kaithi 2",
+    "release_date":"2023-10-02"
+  }
+	
+- Sample Response:
+   {"success":true}
+   
+POST '/api/v1/actors'
+- Creates a new actor
+- Request Arguments:
+  {
+    "name":"Johny Depp",
+    "age":55,
+    "gender":"Male"
+  }
+	
+- Sample Response:
+   {"success":true}
+   
+   
+PATCH '/api/v1/movies/<movie_id>'
+- edits a movie
+- Request Arguments:
+  {
+    "release_date":"2023-10-04"
+  }
+	
+- Sample Response:
+   {
+    "id": 1,
+    "success": true
+	}
+   
+PATCH '/api/v1/actors/<actor_id>'
+- Edits an actor
+- Request Arguments:
+  {
+    "age":55
+  }
+	
+- Sample Response:
+   {
+    "id": 1,
+    "success": true
+   }
+   
+   
+DELETE '/api/v1/movies/<movie_id>'
+- Removes a movie
+- Sample Response:
+   {
+    "success": true
+	}
+   
+DELETE '/api/v1/actors/<actor_id>'
+- Removes an actor
+- Sample Response:
+   {
+    "success": true
+   }
+
+##### AUTH0 tokens used to test RBAC #########
+
+import udacity-fnsd-capstone.postman_collection folder to postman to test API endpoints with different roles
+
+AUTH token for roles (already included in postman collection):
+
+Assistant:
+
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkczMTk2ZElxTnNOcG5VNUZrSWQ1WCJ9.eyJpc3MiOiJodHRwczovL2NhcHN0b25lZnNuZC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjUxOThiZmQ1MGRkNzIxMDNlYmFhOGFmIiwiYXVkIjoiY2Fwc3RvbmUiLCJpYXQiOjE2OTYyMzUyMjgsImV4cCI6MTY5NjMyMTYyOCwiYXpwIjoiZk1VVm1PQ1pJVFpUeGhmcVpOSGdNekFWdFVRZjZHc2QiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIl19.OC4ixHCGggpgVCGvALK4cYGdjLYKVIfaCrb_qvb6VZQhAwudGTKhgYLwd2ajFlBE1Atw7y1vAHwtRPSBzxifkaDV262fevGOFirUGIkMoKMTx5T3gig30rw0ABcQm9XgjxD_cfShHfLKuSb3k6M5EE_3JTsgKLxJAkJUfaFOtGOZ-dK8c23I6q5g3h1p-bt_srF7tB93SPT0OWNckefa_t4prGR8tsgC-HDpK_m3A7V7GZOMx1eKU1PxI_il8-Hg0QpOr5l9Fc29C1gzBKSciC3Osya0UR8PqYLcyESy1REt1ifJCHEWioo0lkADBrukM79Pd-S5bHPpKZICEqLfcQ
+
+Director:
+
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkczMTk2ZElxTnNOcG5VNUZrSWQ1WCJ9.eyJpc3MiOiJodHRwczovL2NhcHN0b25lZnNuZC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjUxOThjMjM5NzQ1ZDljNjNjMjkxZGZmIiwiYXVkIjoiY2Fwc3RvbmUiLCJpYXQiOjE2OTYyMzQ5NDEsImV4cCI6MTY5NjMyMTM0MSwiYXpwIjoiZk1VVm1PQ1pJVFpUeGhmcVpOSGdNekFWdFVRZjZHc2QiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvciIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3IiLCJwYXRjaDptb3ZpZSIsInBvc3Q6YWN0b3IiXX0.yK-iy1tgAkREYmb-a9wlt_8_kPpdFLXZP6SuOyAcLHCTYytrVEk3L0YP4RRsbOQjPmEE-zFXRmsA_pjoVjvclYqCvHJJMuXJewPt2t3SU_HMDt_Z3NshGATZx3RHzWe663kp-Au7n9WLacDyp_xogqF8wBq_N6zGi52FjTLY1ZmQWtDJBc_V2Kd17GLwfQCSjVrlS_Fn06xHXFCtFiffYNPrM6h55feeQaVsVsojmMhuSu2YFR7eTnhKQixNpv863Y-FTdXSYvG5o9FqXT9m_SGQvVMq-XK6W065CrIAPlZo-1xEBFn4WiajLfYhZX1Cad6mAzKIDjFHsRWg778laA
+
+Producer:
+
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkczMTk2ZElxTnNOcG5VNUZrSWQ1WCJ9.eyJpc3MiOiJodHRwczovL2NhcHN0b25lZnNuZC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjUxOThjNGM5NzQ1ZDljNjNjMjkxZTI2IiwiYXVkIjoiY2Fwc3RvbmUiLCJpYXQiOjE2OTYyMzQ2ODEsImV4cCI6MTY5NjMyMTA4MSwiYXpwIjoiZk1VVm1PQ1pJVFpUeGhmcVpOSGdNekFWdFVRZjZHc2QiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvciIsImRlbGV0ZTptb3ZpZSIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3IiLCJwYXRjaDptb3ZpZSIsInBvc3Q6YWN0b3IiLCJwb3N0Om1vdmllIl19.39gqkEdC5vNLQrRI7KCSyXV7Vvi7_09qVLd3ZmgadbWSqg-Mfxc5tm0NVwgMEpetYmXabg-RFNtZu0Cc2sdOwA_tNbVCczeqWjZxFgTLWHpMKUMxGz-O1LBbvGgN_8gZ84pok8oLUvYkh3TM79pSKUOs-Lf6PXH79pr09T1V1ToFwQe5pxZm03IHcDZzQ-dCaZ4Ak-XmnFNuy2QbjbVNU01Kl7S8DgN-mJHeZIfLP37E2Tfw9jIPnbZdz28V0qDhOh6k95MFpquAQmtAck6kzuhfVewJLO6S2awP6f0e8JczTfOTE9HU_Osf7sFhML6xif8g1WoGKliqV9279iWjUw
+
+
