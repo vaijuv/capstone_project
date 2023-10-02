@@ -160,6 +160,37 @@ Producer:Has permission to view,add, modify or delete both actors and movies
 
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkczMTk2ZElxTnNOcG5VNUZrSWQ1WCJ9.eyJpc3MiOiJodHRwczovL2NhcHN0b25lZnNuZC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjUxOThjNGM5NzQ1ZDljNjNjMjkxZTI2IiwiYXVkIjoiY2Fwc3RvbmUiLCJpYXQiOjE2OTYyMzQ2ODEsImV4cCI6MTY5NjMyMTA4MSwiYXpwIjoiZk1VVm1PQ1pJVFpUeGhmcVpOSGdNekFWdFVRZjZHc2QiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvciIsImRlbGV0ZTptb3ZpZSIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3IiLCJwYXRjaDptb3ZpZSIsInBvc3Q6YWN0b3IiLCJwb3N0Om1vdmllIl19.39gqkEdC5vNLQrRI7KCSyXV7Vvi7_09qVLd3ZmgadbWSqg-Mfxc5tm0NVwgMEpetYmXabg-RFNtZu0Cc2sdOwA_tNbVCczeqWjZxFgTLWHpMKUMxGz-O1LBbvGgN_8gZ84pok8oLUvYkh3TM79pSKUOs-Lf6PXH79pr09T1V1ToFwQe5pxZm03IHcDZzQ-dCaZ4Ak-XmnFNuy2QbjbVNU01Kl7S8DgN-mJHeZIfLP37E2Tfw9jIPnbZdz28V0qDhOh6k95MFpquAQmtAck6kzuhfVewJLO6S2awP6f0e8JczTfOTE9HU_Osf7sFhML6xif8g1WoGKliqV9279iWjUw
 
+###################Project dependencies#############
+run pip install requirement.txt to download all dependencies for the project
+
+################## Instructions to host the project on Render so that a developer can follow the instructions and able to deploy the code to Render
+1) Create Repository for project in Github/Gitlab
+2) Upload the locally tested project to the Repository
+3) Create a Render Account - https://dashboard.render.com
+4) Set up a Database Service with Postgres
+	Once you are logged in, you will be redirected to the Render Dashboard. Click the New PostgreSQL button to set up a Postgres cloud database.
+	On the New Postgres page:
+		Enter a name for the new database service: capstone_postgres
+		Select an instance type: Free
+		Click Create Database button
+5)Deploy Apps with Render's Web Service
+	Go back to Render Dashboard and create a new Web Service.
+	Connect your Flask app from GitHub or GitLab repo to the Web Service
+	On the New Web Service page:
+	Provide a name for the new database service: render-deployment-example
+	Select an instance type: Free
+	Enter the build command: pip install -r requirements.txt
+	Enter the Start Command gunicorn app:app
+6) Connect Web service with postgres
+	Before you click Create Web Service, you will need to connect the Postgres service so your Flask app can read and write data to the Postgre
+	From the Postgres service (name: "postgres-deployment-example"), click the "Info" side navigation and copy the Internal Database URL from the Connections page.
+	From the web service (name: "render-deployment-example"), create an environment variable with the key: DATABASE_URL and Database URL value copied from the Postgres service. Click create Web Service
+7) Migrate db tables to postgres render
+	Go to Postgres service in Render Dashboard
+        Click the Connect dropdown and select External connection Tab. Copy the URL
+	Paste the url in local environment variables specifying database url and run flask db upgrade in local project terminal.
+	This will migrate project required db tables to Postgres Render
+8) After the Web Service is ready, you can open your Flask app on the browser by clicking the app URL under the title on the Web Service page.
 
 ############ API Hosted In Render Cloud#################
 Host url: https://capstone-service-b4px.onrender.com
